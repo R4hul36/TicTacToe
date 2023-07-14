@@ -5,16 +5,7 @@ import { styled } from "styled-components";
 const data = ["", "", "", "", "", "", "", "", ""];
 
 const GameTiles = () => {
-  const {
-    setGameSquares,
-    gameSquares,
-    handleClick,
-    result,
-
-    draw,
-    setGameEnd,
-    currentSymbol,
-  } = useGlobalContext();
+  const { gameSquares, handleClick } = useGlobalContext();
 
   // if (result) {
   //   return window.alert(`Congratulations ${player} Won!!!`);
@@ -39,12 +30,13 @@ const GameTiles = () => {
 
 const Wrapper = styled.section`
   @media (min-width: 1000px) {
-    width: 28vw;
+    width: 25vw;
     gap: 0.7rem;
   }
-  width: 85vw;
+  padding-bottom: 45%;
+  width: 80vw;
   display: grid;
-  margin: 3rem auto auto auto;
+  margin: 2rem auto auto auto;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
 `;

@@ -5,9 +5,14 @@ const AppContext = React.createContext();
 const data = ["", "", "", "", "", "", "", "", ""];
 
 const AppProvider = ({ children }) => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
   const [gameSquares, setGameSquares] = useState(data);
   const [playerSymbol, setPlayerSymbol] = useState("X");
   const [currentSymbol, setCurrentSymbol] = useState("");
+  const [gameStart, setGameStart] = useState(false);
   const [gameEnd, setGameEnd] = useState({
     result: false,
     player: "",
@@ -15,6 +20,7 @@ const AppProvider = ({ children }) => {
   });
 
   const handleClick = (id) => {
+    setGameStart(true);
     let oldData = gameSquares.map((tile, index) => {
       if (id === index && tile === "") {
         setPlayerSymbol((prevSymbol) => {
@@ -44,7 +50,7 @@ const AppProvider = ({ children }) => {
     let result = test.map((item) => {
       let winner = item.every((tile) => tile === currentSymbol && tile !== "");
 
-      if (winner === true) {
+      if (winner) {
         rowWin = true;
       }
     });
@@ -112,22 +118,27 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  // setting up react-confetti
+
+  const handleWindowSize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
+
   const resetGame = () => {
+    setGameStart(false);
     setGameSquares(data);
     setGameEnd({ result: false, player: "", draw: false });
     setPlayerSymbol("X");
   };
 
   useEffect(() => {
+    window.onresize = () => handleWindowSize();
     checkDraw();
     checkWin();
   }, [gameSquares]);
-
-  // useEffect(() => {
-  //   if (gameEnd.result || gameEnd.draw) {
-  //     resetGame();
-  //   }
-  // }, [gameEnd.result, gameEnd.draw]);
 
   return (
     <AppContext.Provider
@@ -140,6 +151,9 @@ const AppProvider = ({ children }) => {
         setGameEnd,
         currentSymbol,
         resetGame,
+        setPlayerSymbol,
+        gameStart,
+        ...windowSize,
       }}
     >
       {children}

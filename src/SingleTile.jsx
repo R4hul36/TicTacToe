@@ -1,11 +1,10 @@
 import React from "react";
-import { useGlobalContext } from "./context";
 import { styled } from "styled-components";
 
 const SingleTile = ({ tile }) => {
   return (
     <Wrapper>
-      <p>{tile}</p>
+      <p className={`${tile === "X" ? "red-tile" : "blue-tile"}`}>{tile}</p>
     </Wrapper>
   );
 };
@@ -13,16 +12,24 @@ const SingleTile = ({ tile }) => {
 export default SingleTile;
 
 const Wrapper = styled.div`
-  background-color: #f57842;
+  background-color: #add8e6;
   opacity: 0.9;
   border-radius: 10%;
   //border: 3px solid black;
-  height: 10rem;
+  height: 15vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
   p {
-    font-size: 6rem;
+    font-size: 5.5rem;
     color: black;
+  }
+
+  .red-tile {
+    color: red;
+  }
+  .blue-tile {
+    color: blue;
   }
 `;

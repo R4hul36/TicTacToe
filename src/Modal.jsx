@@ -11,7 +11,7 @@ const Modal = () => {
         <p className='result-txt'>Congratulations!!! player "{player}" won!</p>
       )}
       {(result || draw) && (
-        <button className='btn' onClick={() => resetGame()}>
+        <button className='reset-btn' onClick={() => resetGame()}>
           Restart Game
         </button>
       )}
@@ -26,18 +26,19 @@ const Wrapper = styled.div`
   align-items: center;
   //padding: 10px;
 
-  .btn {
+  .reset-btn {
     padding: 18px;
     margin-top: 1.5rem;
     font-size: 1.3rem;
-    background-color: #f57842;
+    background-color: #add8e6;
     border: none;
     border-radius: 18px;
   }
   .result-txt {
     text-align: center;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     font-weight: 600;
+    width: 85vw;
   }
 `;
 
